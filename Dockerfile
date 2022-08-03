@@ -39,9 +39,6 @@ RUN pecl install protobuf-${PROTOBUF_VERSION} && docker-php-ext-enable protobuf
 RUN apk add linux-headers
 RUN MAKEFLAGS="-j 16" pecl install grpc && docker-php-ext-enable grpc
 
-# Copy Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
 # Copy RoadRunner
 COPY --from=rr /usr/bin/rr /usr/bin/rr
 
