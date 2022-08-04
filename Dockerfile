@@ -45,6 +45,8 @@ COPY --from=rr /usr/bin/rr /usr/bin/rr
 # Install Temporal CLI
 COPY --from=temporalio/admin-tools /usr/local/bin/tctl /usr/local/bin/tctl
 
+COPY .bashrc /root
+
 COPY wait-for-temporal-and-db.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/wait-for-temporal-and-db.sh
 
