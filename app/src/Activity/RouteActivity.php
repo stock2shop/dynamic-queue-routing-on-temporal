@@ -7,6 +7,7 @@ use Cycle\ORM\EntityManager;
 use Cycle\ORM\ORMInterface;
 use Spiral\RoadRunner\Jobs\Jobs;
 use Spiral\RoadRunner\Jobs\Queue\MemoryCreateInfo;
+use Spiral\RoadRunner\Jobs\Queue\SQSCreateInfo;
 use Spiral\TemporalBridge\Attribute\AssignWorker;
 use Temporal\Activity\ActivityInterface;
 use Temporal\Activity\ActivityMethod;
@@ -50,7 +51,8 @@ class RouteActivity
         dumprr(sprintf("New queue route `%s`", $route));
 
         try {
-            $this->jobs->create(new MemoryCreateInfo($route, $priority));
+            // $this->jobs->create(new MemoryCreateInfo($route, $priority));
+            $this->jobs->create(new SQSCreateInfo($route, $priority));
             $this->jobs->resume($route);
         } catch (\Throwable $e) {
             dumprr(sprintf("Duplicate queue route `%s`", $route));
