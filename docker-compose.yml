@@ -76,6 +76,15 @@ services:
     ports:
       - 8088:8088
 
+  elasticmq:
+    container_name: elasticmq
+    image: softwaremill/elasticmq-native
+    networks:
+      - temporal-network
+    ports:
+      - 9324:9324
+      - 9325:9325
+
   # This service is similar to the "s2s-api" service in
   # https://github.com/stock2shop/api/blob/master/docker-compose.yml
   # Unlike stock2shop/app, which uses phusion/baseimage,
