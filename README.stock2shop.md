@@ -36,19 +36,25 @@ As per [README](https://github.com/stock2shop/queue-orchestration)
 Start a bash session on `s2s-worker`
 ```bash
 docker exec -it s2s-worker bash
+```
+
+Push data to a named queue group, see `app/src/Activity/RouteActivity.php`
+```bash
 cd /app
+# Uses custom queue
+php app.php push bob "hello bob" -s 110
+php app.php push mario "hello mario" -s 110
+# Default priority
+php app.php push luigi "hello luigi" -s 11
 ```
 
-Push data to a named queue group
+View RR stats
 ```bash
-php app.php push bob "hello bob" -s 1000
-php app.php push mario "hello mario" -s 1000
-php app.php push luigi "hello luigi" -s 10
+./rr workers -i
 ```
 
-Query DB
+Query DB counters
 ```bash
-mycli -h temporal-mysql -u root -p asdf -D s2sworker -e "show tables;"
 mycli -h temporal-mysql -u root -p asdf -D s2sworker -e \
     "select * from channels;"
 ```
