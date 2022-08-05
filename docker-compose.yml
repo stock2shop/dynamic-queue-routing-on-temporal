@@ -82,7 +82,9 @@ services:
     networks:
       - temporal-network
     ports:
+      # REST endpoint, e.g. `curlie localhost:9324`
       - 9324:9324
+      # Stats web UI, http://localhost:9325/
       - 9325:9325
 
   # This service is similar to the "s2s-api" service in
